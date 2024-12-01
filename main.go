@@ -3,9 +3,7 @@ package main
 import (
 	"sync"
 
-	"crawler/crawler/crawler"
-	"crawler/crawler/fetcher"
-	"crawler/crawler/visited"
+	"github.com/mojcaostir/crawler/crawlerService"
 )
 
 func main() {

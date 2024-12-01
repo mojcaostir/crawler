@@ -1,4 +1,4 @@
-package visited
+package crawlerService
 
 import "sync"
 

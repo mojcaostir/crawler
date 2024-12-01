@@ -1,4 +1,4 @@
-package fetcher
+package crawlerService
 
 import (
 	"fmt"

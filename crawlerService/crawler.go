@@ -1,12 +1,9 @@
-package crawler
+package crawlerService
 
 import (
 	"fmt"
 	"strings"
 	"sync"
-
-	"crawler/crawler/fetcher"
-	"crawler/crawler/visited"
 )
 
 // Crawl uses fetcher to recursively crawl
