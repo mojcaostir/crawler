@@ -1,4 +1,4 @@
-module crawler
+module github.com/mojcaostir/crawler
 
 go 1.23.3
 

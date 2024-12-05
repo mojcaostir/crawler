@@ -2,7 +2,7 @@ package crawlerService
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 
@@ -27,7 +27,7 @@ func (RealFetcher) Fetch(url string) (string, []string, error) {
 	defer resp.Body.Close()
 
 	// Read response body
-	bodyBytes, err := ioutil.ReadAll(resp.Body)
+	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", nil, fmt.Errorf("failed to read response body: %v", err)
 	}

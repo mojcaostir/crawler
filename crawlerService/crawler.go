@@ -2,13 +2,11 @@ package crawlerService
 
 import (
 	"fmt"
-	"strings"
 	"sync"
 )
 
-// Crawl uses fetcher to recursively crawl
-// pages starting with url, to a maximum of depth.
-func Crawl(url string, depth int, fetcher fetcher.Fetcher, visited *visited.SafeVisited, wg *sync.WaitGroup) {
+// Crawl uses fetcher to recursively crawl pages starting with url, to a maximum of depth.
+func Crawl(url string, depth int, fetcher Fetcher, visited *SafeVisited, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	if depth <= 0 {
@@ -27,8 +25,12 @@ func Crawl(url string, depth int, fetcher fetcher.Fetcher, visited *visited.Safe
 	}
 
 	// Find all occurrences of the word "Spored"
-	count := strings.Count(body, "Spored")
-	fmt.Printf("URL: %s, 'Spored' occurrences: %d\n", url, count)
+	//count := strings.Count(body, "Spored")
+	//fmt.Printf("URL: %s, 'Spored' occurrences: %d\n", url, count)
+
+	data := ExtractDataDays(body)
+
+	fmt.Printf("BODY: %s", data)
 
 	for _, u := range urls {
 		wg.Add(1)

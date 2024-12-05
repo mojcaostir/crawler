@@ -4,17 +4,19 @@ import "sync"
 
 // SafeVisited tracks visited URLs with thread-safe access.
 type SafeVisited struct {
-	mu      sync.Mutex
+	mutex      sync.Mutex
 	Visited map[string]bool
 }
 
 // MarkVisited checks if a URL has been visited and marks it as visited if not.
-func (sv *SafeVisited) MarkVisited(url string) bool {
-	sv.mu.Lock()
-	defer sv.mu.Unlock()
-	if sv.Visited[url] {
+func (safeVisited *SafeVisited) MarkVisited(url string) bool {
+	safeVisited.mutex.Lock()
+	defer safeVisited.mutex.Unlock()
+
+	if safeVisited.Visited[url] {
 		return false // Already visited
 	}
-	sv.Visited[url] = true
+	
+	safeVisited.Visited[url] = true
 	return true
 }

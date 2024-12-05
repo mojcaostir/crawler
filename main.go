@@ -7,16 +7,18 @@ import (
 )
 
 func main() {
-	// Initialize SafeVisited and WaitGroup
-	visitedTracker := &visited.SafeVisited{Visited: make(map[string]bool)}
+	// Initialize SafeVisited
+	visitedTracker := &crawlerService.SafeVisited{Visited: make(map[string]bool)}
+
+	// Initialize WaitGroup. wg is a  used to wait for a collection of goroutines to finish executing.
 	var wg sync.WaitGroup
 
 	// Create a real fetcher
-	realFetcher := fetcher.RealFetcher{}
+	realFetcher := crawlerService.RealFetcher{}
 
 	// Start crawling
 	wg.Add(1)
-	go crawler.Crawl("https://www.kinodvor.org/spored/", 2, realFetcher, visitedTracker, &wg)
+	go crawlerService.Crawl("https://www.kinodvor.org/spored/", 1, realFetcher, visitedTracker, &wg)
 
 	// Wait for all goroutines to finish
 	wg.Wait()
